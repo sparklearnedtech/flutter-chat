@@ -10,6 +10,11 @@ class ChatPage extends StatefulWidget {
 
 class _ChatPageState extends State<ChatPage> {
   @override
+  void initState() {
+    super.initState();
+    print('init state');
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
