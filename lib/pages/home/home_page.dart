@@ -24,6 +24,12 @@ class _HomePageState extends State<HomePage> {
               builder: (BuildContext context) => AlertDialog(
                 title: const Text("Please enter your name"),
                 content: TextFormField(),
+                actions: [
+                  TextButton(
+                    onPressed: () => {},
+                    child: const Text("Submit"),
+                  ),
+                ],
               ),
             ),
           },
