@@ -15,7 +15,7 @@ class _ChatPageState extends State<ChatPage> {
       appBar: AppBar(
         title: const Center(child: Text("Chat Page")),
       ),
-      body: Text("Chat Page"),
+      body: Text("Chat Page " + widget.name),
     );
   }
 }
