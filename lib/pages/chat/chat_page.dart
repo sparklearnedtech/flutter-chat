@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:socket_io_client/socket_io_client.dart' as io;
 
 class ChatPage extends StatefulWidget {
   final String name;
@@ -9,10 +10,28 @@ class ChatPage extends StatefulWidget {
 }
 
 class _ChatPageState extends State<ChatPage> {
+  late io.Socket socket;
   @override
   void initState() {
     super.initState();
-    print('init state');
+    connect();
+  }
+
+  void connect() {
+    socket = io.io(
+      'http://localhost:3000',
+      io.OptionBuilder()
+          .setTransports(['websocket'])
+          .enableAutoConnect()
+          .build(),
+    );
+    socket.connect();
+    socket.onConnect(
+      (data) => {
+        print("Connected"),
+        socket.emit("message", widget.name),
+      },
+    );
   }
 
   Widget build(BuildContext context) {
