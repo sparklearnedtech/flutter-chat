@@ -64,11 +64,21 @@ class _ChatPageState extends State<ChatPage> {
       body: Column(
         children: [
           Expanded(
-            child: ListView(
-              children: [
-                SentMessage(sender: 'chan', message: 'Hello World'),
-                RecvMessage(sender: 'Stranger', message: 'Flutter Workshop')
-              ],
+            child: ListView.builder(
+              itemCount: _messages.length,
+              itemBuilder: (context, index) {
+                if (_messages[index].self) {
+                  return SentMessage(
+                    sender: _messages[index].sender,
+                    message: _messages[index].message,
+                  );
+                } else {
+                  return RecvMessage(
+                    sender: _messages[index].sender,
+                    message: _messages[index].message,
+                  );
+                }
+              },
             ),
           ),
           Padding(
