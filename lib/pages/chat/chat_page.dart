@@ -19,7 +19,7 @@ class _ChatPageState extends State<ChatPage> {
         children: [
           Expanded(child: Container()),
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
             child: Row(
               children: [
                 Expanded(child: TextFormField()),
