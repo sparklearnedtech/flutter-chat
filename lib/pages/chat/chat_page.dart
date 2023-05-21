@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:maritech/components/recvMessage.dart';
+import 'package:maritech/components/sentMessage.dart';
 import 'package:maritech/helpers/msg_model.dart';
 import 'package:socket_io_client/socket_io_client.dart' as io;
 
@@ -61,7 +63,14 @@ class _ChatPageState extends State<ChatPage> {
       ),
       body: Column(
         children: [
-          Expanded(child: Container()),
+          Expanded(
+            child: ListView(
+              children: [
+                SentMessage(sender: 'chan', message: 'Hello World'),
+                RecvMessage(sender: 'Stranger', message: 'Flutter Workshop')
+              ],
+            ),
+          ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
             child: Row(
