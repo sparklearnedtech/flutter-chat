@@ -34,12 +34,15 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                   TextButton(
-                    onPressed: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => ChatPage(),
+                    onPressed: () => {
+                      Navigator.pop(context),
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ChatPage(),
+                        ),
                       ),
-                    ),
+                    },
                     child: const Text(
                       "Submit",
                       style: TextStyle(fontSize: 16, color: Colors.blue),
