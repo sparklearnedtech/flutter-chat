@@ -27,6 +27,13 @@ class _HomePageState extends State<HomePage> {
                 title: const Text("Please enter your name"),
                 content: TextFormField(
                   controller: nameController,
+                  validator: (value) {
+                    if (value == null || value.isEmpty || value.length < 3) {
+                      return "Please enter your name";
+                    } else {
+                      return null;
+                    }
+                  },
                 ),
                 actions: [
                   TextButton(
