@@ -18,14 +18,17 @@ class _ChatPageState extends State<ChatPage> {
       body: Column(
         children: [
           Expanded(child: Container()),
-          Row(
-            children: [
-              Expanded(child: TextFormField()),
-              IconButton(
-                onPressed: () {},
-                icon: const Icon(Icons.send),
-              )
-            ],
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              children: [
+                Expanded(child: TextFormField()),
+                IconButton(
+                  onPressed: () {},
+                  icon: const Icon(Icons.send),
+                )
+              ],
+            ),
           )
         ],
       ),
