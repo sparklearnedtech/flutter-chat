@@ -13,6 +13,7 @@ class MariTech extends StatelessWidget {
     return const MaterialApp(
       title: 'MariTech',
       home: HomePage(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
