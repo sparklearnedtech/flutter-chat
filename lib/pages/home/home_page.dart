@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:maritech/pages/chat/chat_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -26,14 +27,19 @@ class _HomePageState extends State<HomePage> {
                 content: TextFormField(),
                 actions: [
                   TextButton(
-                    onPressed: () => {},
+                    onPressed: () => Navigator.pop(context),
                     child: const Text(
                       "Cancel",
                       style: TextStyle(fontSize: 16),
                     ),
                   ),
                   TextButton(
-                    onPressed: () => {},
+                    onPressed: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ChatPage(),
+                      ),
+                    ),
                     child: const Text(
                       "Submit",
                       style: TextStyle(fontSize: 16, color: Colors.blue),
