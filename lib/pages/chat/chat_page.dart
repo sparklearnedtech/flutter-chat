@@ -32,7 +32,21 @@ class _ChatPageState extends State<ChatPage> {
     socket.onConnect(
       (data) => {
         print("Connected"),
-        socket.emit("message", widget.name),
+        // socket.emit("message", widget.name),
+        socket.on(
+          "message",
+          (data) => {
+            print(data),
+            setState(
+              () {
+                _messages.add(MsgModel(
+                    self: data["sender"] == widget.name,
+                    message: data["message"],
+                    sender: data["sender"]));
+              },
+            ),
+          },
+        ),
       },
     );
   }
