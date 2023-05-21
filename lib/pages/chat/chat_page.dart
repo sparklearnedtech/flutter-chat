@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:maritech/helpers/msg_model.dart';
 import 'package:socket_io_client/socket_io_client.dart' as io;
 
 class ChatPage extends StatefulWidget {
@@ -12,6 +13,7 @@ class ChatPage extends StatefulWidget {
 class _ChatPageState extends State<ChatPage> {
   late io.Socket socket;
   final TextEditingController _msgController = TextEditingController();
+  final List<MsgModel> _messages = [];
   @override
   void initState() {
     super.initState();
@@ -66,6 +68,10 @@ class _ChatPageState extends State<ChatPage> {
                 IconButton(
                   onPressed: () {
                     if (_msgController.text.isNotEmpty) {
+                      _messages.add(MsgModel(
+                          self: true,
+                          message: _msgController.text,
+                          sender: widget.name));
                       socket.emit(
                         "message",
                         {
