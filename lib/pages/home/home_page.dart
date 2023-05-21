@@ -10,6 +10,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   TextEditingController nameController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,15 +26,18 @@ class _HomePageState extends State<HomePage> {
               context: context,
               builder: (BuildContext context) => AlertDialog(
                 title: const Text("Please enter your name"),
-                content: TextFormField(
-                  controller: nameController,
-                  validator: (value) {
-                    if (value == null || value.isEmpty || value.length < 3) {
-                      return "Please enter your name";
-                    } else {
-                      return null;
-                    }
-                  },
+                content: Form(
+                  key: _formKey,
+                  child: TextFormField(
+                    controller: nameController,
+                    validator: (value) {
+                      if (value == null || value.isEmpty || value.length < 3) {
+                        return "Please enter your name";
+                      } else {
+                        return null;
+                      }
+                    },
+                  ),
                 ),
                 actions: [
                   TextButton(
@@ -45,14 +49,16 @@ class _HomePageState extends State<HomePage> {
                   ),
                   TextButton(
                     onPressed: () => {
-                      print(nameController.text),
-                      Navigator.pop(context),
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => ChatPage(),
-                        ),
-                      ),
+                      if (_formKey.currentState!.validate())
+                        {
+                          Navigator.pop(context),
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ChatPage(),
+                            ),
+                          ),
+                        },
                     },
                     child: const Text(
                       "Submit",
