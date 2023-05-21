@@ -20,7 +20,13 @@ class _HomePageState extends State<HomePage> {
         onPressed: () {
           print('Hello World');
         },
-        child: const Text("Chat Page"),
+        child: const Text(
+          "Chat Page",
+          style: TextStyle(
+            color: Colors.amber,
+            fontSize: 20,
+          ),
+        ),
       ),
     );
   }
