@@ -16,15 +16,17 @@ class _HomePageState extends State<HomePage> {
           child: Text("Home Page"),
         ),
       ),
-      body: TextButton(
-        onPressed: () {
-          print('Hello World');
-        },
-        child: const Text(
-          "Chat Page",
-          style: TextStyle(
-            color: Colors.amber,
-            fontSize: 20,
+      body: Center(
+        child: TextButton(
+          onPressed: () {
+            print('Hello World');
+          },
+          child: const Text(
+            "Chat Page",
+            style: TextStyle(
+              color: Colors.amber,
+              fontSize: 20,
+            ),
           ),
         ),
       ),
