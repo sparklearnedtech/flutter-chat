@@ -39,10 +39,13 @@ class _ChatPageState extends State<ChatPage> {
             print(data),
             setState(
               () {
-                _messages.add(MsgModel(
+                _messages.add(
+                  MsgModel(
                     self: data["sender"] == widget.name,
                     message: data["message"],
-                    sender: data["sender"]));
+                    sender: data["sender"],
+                  ),
+                );
               },
             ),
           },
