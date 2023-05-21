@@ -18,8 +18,14 @@ class _HomePageState extends State<HomePage> {
       ),
       body: Center(
         child: TextButton(
-          onPressed: () {
-            print('Hello World');
+          onPressed: () => {
+            showDialog(
+              context: context,
+              builder: (BuildContext context) => AlertDialog(
+                title: const Text("Please enter your name"),
+                content: TextFormField(),
+              ),
+            ),
           },
           child: const Text(
             "Chat Page",
