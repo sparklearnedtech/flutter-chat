@@ -9,6 +9,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  TextEditingController nameController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,7 +25,9 @@ class _HomePageState extends State<HomePage> {
               context: context,
               builder: (BuildContext context) => AlertDialog(
                 title: const Text("Please enter your name"),
-                content: TextFormField(),
+                content: TextFormField(
+                  controller: nameController,
+                ),
                 actions: [
                   TextButton(
                     onPressed: () => Navigator.pop(context),
@@ -35,6 +38,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                   TextButton(
                     onPressed: () => {
+                      print(nameController.text),
                       Navigator.pop(context),
                       Navigator.push(
                         context,
