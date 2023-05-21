@@ -27,7 +27,17 @@ class _HomePageState extends State<HomePage> {
                 actions: [
                   TextButton(
                     onPressed: () => {},
-                    child: const Text("Submit"),
+                    child: const Text(
+                      "Cancel",
+                      style: TextStyle(fontSize: 16),
+                    ),
+                  ),
+                  TextButton(
+                    onPressed: () => {},
+                    child: const Text(
+                      "Submit",
+                      style: TextStyle(fontSize: 16, color: Colors.blue),
+                    ),
                   ),
                 ],
               ),
