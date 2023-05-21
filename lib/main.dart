@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:maritech/pages/home/home_page.dart';
 
 void main() {
   runApp(const MariTech());
@@ -9,6 +10,9 @@ class MariTech extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return const MaterialApp(
+      title: 'MariTech',
+      home: HomePage(),
+    );
   }
 }
