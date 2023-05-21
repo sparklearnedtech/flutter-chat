@@ -56,7 +56,9 @@ class _HomePageState extends State<HomePage> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => ChatPage(),
+                            builder: (context) => ChatPage(
+                              name: name,
+                            ),
                           ),
                         );
                       }
