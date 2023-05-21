@@ -22,7 +22,21 @@ class _ChatPageState extends State<ChatPage> {
             padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
             child: Row(
               children: [
-                Expanded(child: TextFormField()),
+                Expanded(
+                  child: TextFormField(
+                    decoration: const InputDecoration(
+                      hintText: "Type a message",
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(50),
+                        ),
+                      ),
+                      contentPadding: EdgeInsets.symmetric(
+                        horizontal: 20,
+                      ),
+                    ),
+                  ),
+                ),
                 IconButton(
                   onPressed: () {},
                   icon: const Icon(Icons.send),
