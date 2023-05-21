@@ -13,7 +13,7 @@ class RecvMessage extends StatelessWidget {
         constraints:
             BoxConstraints(maxWidth: MediaQuery.of(context).size.width * 0.8),
         child: Card(
-          color: Colors.green,
+          color: Colors.blue,
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
             child: Column(

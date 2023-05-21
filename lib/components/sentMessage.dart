@@ -17,8 +17,8 @@ class SentMessage extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Text(
                   sender,
