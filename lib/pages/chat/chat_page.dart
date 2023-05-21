@@ -20,7 +20,7 @@ class _ChatPageState extends State<ChatPage> {
           Expanded(child: Container()),
           Row(
             children: [
-              TextFormField(),
+              Expanded(child: TextFormField()),
               IconButton(
                 onPressed: () {},
                 icon: const Icon(Icons.send),
