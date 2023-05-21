@@ -39,7 +39,10 @@ class _ChatPageState extends State<ChatPage> {
                 ),
                 IconButton(
                   onPressed: () {},
-                  icon: const Icon(Icons.send),
+                  icon: const Icon(
+                    Icons.send,
+                    color: Colors.blue,
+                  ),
                 )
               ],
             ),
