@@ -48,17 +48,18 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                   TextButton(
-                    onPressed: () => {
-                      if (_formKey.currentState!.validate())
-                        {
-                          Navigator.pop(context),
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => ChatPage(),
-                            ),
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+                        String name = nameController.text;
+                        nameController.clear();
+                        Navigator.pop(context);
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ChatPage(),
                           ),
-                        },
+                        );
+                      }
                     },
                     child: const Text(
                       "Submit",
