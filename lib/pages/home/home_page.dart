@@ -16,7 +16,10 @@ class _HomePageState extends State<HomePage> {
           child: Text("Home Page"),
         ),
       ),
-      body: Text("Home Page"),
+      body: TextButton(
+        onPressed: () {},
+        child: const Text("Chat Page"),
+      ),
     );
   }
 }
