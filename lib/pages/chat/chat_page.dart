@@ -11,6 +11,7 @@ class ChatPage extends StatefulWidget {
 
 class _ChatPageState extends State<ChatPage> {
   late io.Socket socket;
+  final TextEditingController _msgController = TextEditingController();
   @override
   void initState() {
     super.initState();
@@ -59,10 +60,22 @@ class _ChatPageState extends State<ChatPage> {
                         horizontal: 20,
                       ),
                     ),
+                    controller: _msgController,
                   ),
                 ),
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    if (_msgController.text.isNotEmpty) {
+                      socket.emit(
+                        "message",
+                        {
+                          "sender": widget.name,
+                          "message": _msgController.text,
+                        },
+                      );
+                      _msgController.clear();
+                    }
+                  },
                   icon: const Icon(
                     Icons.send,
                     color: Colors.blue,
