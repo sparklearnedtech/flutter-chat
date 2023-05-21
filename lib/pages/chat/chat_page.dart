@@ -104,10 +104,17 @@ class _ChatPageState extends State<ChatPage> {
                 IconButton(
                   onPressed: () {
                     if (_msgController.text.isNotEmpty) {
-                      _messages.add(MsgModel(
-                          self: true,
-                          message: _msgController.text,
-                          sender: widget.name));
+                      setState(
+                        () {
+                          _messages.add(
+                            MsgModel(
+                              self: true,
+                              message: _msgController.text,
+                              sender: widget.name,
+                            ),
+                          );
+                        },
+                      );
                       socket.emit(
                         "message",
                         {
