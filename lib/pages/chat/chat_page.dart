@@ -56,6 +56,30 @@ class _ChatPageState extends State<ChatPage> {
     );
   }
 
+  void sendMessage() {
+    if (_msgController.text.isNotEmpty) {
+      setState(
+        () {
+          _messages.add(
+            MsgModel(
+              self: true,
+              message: _msgController.text,
+              sender: widget.name,
+            ),
+          );
+        },
+      );
+      socket.emit(
+        "message",
+        {
+          "sender": widget.name,
+          "message": _msgController.text,
+        },
+      );
+      _msgController.clear();
+    }
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -99,31 +123,14 @@ class _ChatPageState extends State<ChatPage> {
                       ),
                     ),
                     controller: _msgController,
+                    onFieldSubmitted: (value) {
+                      sendMessage();
+                    },
                   ),
                 ),
                 IconButton(
                   onPressed: () {
-                    if (_msgController.text.isNotEmpty) {
-                      setState(
-                        () {
-                          _messages.add(
-                            MsgModel(
-                              self: true,
-                              message: _msgController.text,
-                              sender: widget.name,
-                            ),
-                          );
-                        },
-                      );
-                      socket.emit(
-                        "message",
-                        {
-                          "sender": widget.name,
-                          "message": _msgController.text,
-                        },
-                      );
-                      _msgController.clear();
-                    }
+                    sendMessage();
                   },
                   icon: const Icon(
                     Icons.send,
