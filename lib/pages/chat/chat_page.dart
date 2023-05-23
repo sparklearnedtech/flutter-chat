@@ -84,7 +84,12 @@ class _ChatPageState extends State<ChatPage> {
   }
 
   void scrollDown() {
-    _scrollController.jumpTo(_scrollController.position.maxScrollExtent);
+    Future.delayed(
+      const Duration(milliseconds: 100),
+      () => _scrollController.jumpTo(
+        _scrollController.position.maxScrollExtent,
+      ),
+    );
   }
 
   Widget build(BuildContext context) {
