@@ -15,6 +15,7 @@ class ChatPage extends StatefulWidget {
 class _ChatPageState extends State<ChatPage> {
   late io.Socket socket;
   final TextEditingController _msgController = TextEditingController();
+  final ScrollController _scrollController = ScrollController();
   final List<MsgModel> _messages = [];
   @override
   void initState() {
@@ -52,6 +53,7 @@ class _ChatPageState extends State<ChatPage> {
             ),
           },
         ),
+        scrollDown(),
       },
     );
   }
@@ -77,7 +79,12 @@ class _ChatPageState extends State<ChatPage> {
         },
       );
       _msgController.clear();
+      scrollDown();
     }
+  }
+
+  void scrollDown() {
+    _scrollController.jumpTo(_scrollController.position.maxScrollExtent);
   }
 
   Widget build(BuildContext context) {
@@ -89,6 +96,7 @@ class _ChatPageState extends State<ChatPage> {
         children: [
           Expanded(
             child: ListView.builder(
+              controller: _scrollController,
               itemCount: _messages.length,
               itemBuilder: (context, index) {
                 if (_messages[index].self) {
