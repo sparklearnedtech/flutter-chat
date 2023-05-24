@@ -79,18 +79,25 @@ class _ProfileState extends State<Profile> {
         ),
       );
     } else {
-      return Container(
-        height: MediaQuery.of(context).size.height * 0.8,
-        child: Column(
-          children: [
-            Image.network(
-              user.picture,
-              fit: BoxFit.cover,
-            ),
-            Center(
-              child: Text('${user.fName} ${user.lName}'),
-            ),
-          ],
+      return Expanded(
+        child: Container(
+          color: Colors.amber,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.network(
+                user.picture,
+                fit: BoxFit.fitWidth,
+              ),
+              Center(
+                child: Text('${user.fName} ${user.lName}'),
+              ),
+              Center(
+                child: Text(user.email),
+              ),
+            ],
+          ),
         ),
       );
     }
