@@ -81,8 +81,16 @@ class _ProfileState extends State<Profile> {
     } else {
       return Container(
         height: MediaQuery.of(context).size.height * 0.8,
-        child: Center(
-          child: Text(user.fName),
+        child: Column(
+          children: [
+            Image.network(
+              user.picture,
+              fit: BoxFit.cover,
+            ),
+            Center(
+              child: Text('${user.fName} ${user.lName}'),
+            ),
+          ],
         ),
       );
     }
