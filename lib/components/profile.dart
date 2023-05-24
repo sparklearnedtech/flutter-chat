@@ -3,6 +3,8 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'dart:io';
 
+import 'package:maritech/helpers/userModel.dart';
+
 class Profile extends StatefulWidget {
   const Profile({super.key});
 
@@ -11,6 +13,7 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
+  UserModel? user;
   @override
   void initState() {
     super.initState();
@@ -40,18 +43,14 @@ class _ProfileState extends State<Profile> {
         var results = jsonResponse['results'];
         if (results != null && results.isNotEmpty) {
           var firstResult = results[0];
-          var name = firstResult['name'];
-          var email = firstResult['email'];
-
-          // Access other properties as needed
-          var gender = firstResult['gender'];
-          var picture = firstResult['picture'];
-
-          // Process the data as needed
-          print('Name: $name');
-          print('Email: $email');
-          print('Gender: $gender');
-          print('Picture: $picture');
+          setState(() {
+            user = UserModel(
+                fName: firstResult['name']['first'],
+                lName: firstResult['name']['last'],
+                email: firstResult['email'],
+                isMale: firstResult['gender'] == 'male',
+                picture: firstResult['picture']['large']);
+          });
         } else {
           print('No results found.');
         }
