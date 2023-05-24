@@ -25,7 +25,8 @@ class _ChatPageState extends State<ChatPage> {
 
   void connect() {
     socket = io.io(
-      'http://localhost:3000',
+      'https://flutter-chat-ws.sparklearn-edtech.com',
+      // 'http://localhost:3000',
       io.OptionBuilder()
           .setTransports(['websocket'])
           .enableAutoConnect()
