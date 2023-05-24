@@ -35,8 +35,26 @@ class _ProfileState extends State<Profile> {
       if (response.statusCode == HttpStatus.ok) {
         // Request successful, parse the response
         var data = await response.transform(utf8.decoder).join();
-        // Process the data as needed
-        print(data);
+        // Request successful, parse the response
+        var jsonResponse = json.decode(data);
+        var results = jsonResponse['results'];
+        if (results != null && results.isNotEmpty) {
+          var firstResult = results[0];
+          var name = firstResult['name'];
+          var email = firstResult['email'];
+
+          // Access other properties as needed
+          var gender = firstResult['gender'];
+          var picture = firstResult['picture'];
+
+          // Process the data as needed
+          print('Name: $name');
+          print('Email: $email');
+          print('Gender: $gender');
+          print('Picture: $picture');
+        } else {
+          print('No results found.');
+        }
       } else {
         // Request failed
         print('Request failed with status: ${response.statusCode}.');
