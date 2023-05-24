@@ -14,6 +14,7 @@ class Profile extends StatefulWidget {
 
 class _ProfileState extends State<Profile> {
   late UserModel user;
+  bool isLoading = true;
   @override
   void initState() {
     super.initState();
@@ -50,6 +51,7 @@ class _ProfileState extends State<Profile> {
                 email: firstResult['email'],
                 isMale: firstResult['gender'] == 'male',
                 picture: firstResult['picture']['large']);
+            isLoading = false;
           });
         } else {
           print('No results found.');
@@ -67,12 +69,22 @@ class _ProfileState extends State<Profile> {
     }
   }
 
+  @override
   Widget build(BuildContext context) {
-    return Container(
-      height: MediaQuery.of(context).size.height * 0.8,
-      child: Center(
-        child: Text(user.fName),
-      ),
-    );
+    if (isLoading) {
+      return Container(
+        height: MediaQuery.of(context).size.height * 0.8,
+        child: const Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
+    } else {
+      return Container(
+        height: MediaQuery.of(context).size.height * 0.8,
+        child: Center(
+          child: Text(user.fName),
+        ),
+      );
+    }
   }
 }
