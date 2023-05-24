@@ -13,7 +13,7 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
-  UserModel? user;
+  late UserModel user;
   @override
   void initState() {
     super.initState();
@@ -70,8 +70,8 @@ class _ProfileState extends State<Profile> {
   Widget build(BuildContext context) {
     return Container(
       height: MediaQuery.of(context).size.height * 0.8,
-      child: const Center(
-        child: Text('Profile Component'),
+      child: Center(
+        child: Text(user.fName),
       ),
     );
   }
