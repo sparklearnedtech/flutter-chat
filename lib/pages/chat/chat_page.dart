@@ -54,7 +54,16 @@ class _ChatPageState extends State<ChatPage> {
             scrollDown(),
           },
         ),
-        socket.on("rate-limit", (data) => print(data)),
+        socket.on(
+          "rate-limit",
+          (data) => {
+            setState(
+              () {
+                _messages[data]!.error = true;
+              },
+            ),
+          },
+        ),
       },
     );
   }
@@ -108,6 +117,7 @@ class _ChatPageState extends State<ChatPage> {
                 String key = _messages.keys.elementAt(index);
                 if (_messages[key]!.self) {
                   return SentMessage(
+                    error: _messages[key]!.error,
                     sender: _messages[key]!.sender,
                     message: _messages[key]!.message,
                   );
