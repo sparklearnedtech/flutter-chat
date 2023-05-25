@@ -1,4 +1,5 @@
 class MsgModel {
+  bool error = false;
   bool self = false;
   String message = '';
   String sender = '';
