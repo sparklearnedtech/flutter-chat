@@ -4,6 +4,7 @@ import 'package:maritech/components/sentMessage.dart';
 import 'package:maritech/helpers/msg_model.dart';
 import 'package:socket_io_client/socket_io_client.dart' as io;
 import 'package:uuid/uuid.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class ChatPage extends StatefulWidget {
   final String name;
@@ -26,8 +27,7 @@ class _ChatPageState extends State<ChatPage> {
 
   void connect() {
     socket = io.io(
-      // 'https://flutter-chat-ws.sparklearn-edtech.com',
-      'http://localhost:3000',
+      dotenv.env["WEBSOCKET_URL"],
       io.OptionBuilder()
           .setTransports(['websocket'])
           .enableAutoConnect()
