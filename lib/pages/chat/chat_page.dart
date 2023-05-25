@@ -3,6 +3,7 @@ import 'package:maritech/components/recvMessage.dart';
 import 'package:maritech/components/sentMessage.dart';
 import 'package:maritech/helpers/msg_model.dart';
 import 'package:socket_io_client/socket_io_client.dart' as io;
+import 'package:uuid/uuid.dart';
 
 class ChatPage extends StatefulWidget {
   final String name;
@@ -16,7 +17,7 @@ class _ChatPageState extends State<ChatPage> {
   late io.Socket socket;
   final TextEditingController _msgController = TextEditingController();
   final ScrollController _scrollController = ScrollController();
-  final List<MsgModel> _messages = [];
+  final Map<String, MsgModel> _messages = {};
   @override
   void initState() {
     super.initState();
@@ -25,8 +26,8 @@ class _ChatPageState extends State<ChatPage> {
 
   void connect() {
     socket = io.io(
-      'https://flutter-chat-ws.sparklearn-edtech.com',
-      // 'http://localhost:3000',
+      // 'https://flutter-chat-ws.sparklearn-edtech.com',
+      'http://localhost:3000',
       io.OptionBuilder()
           .setTransports(['websocket'])
           .enableAutoConnect()
@@ -40,41 +41,40 @@ class _ChatPageState extends State<ChatPage> {
         socket.on(
           "message",
           (data) => {
-            print(data),
+            // print(data),
             setState(
               () {
-                _messages.add(
-                  MsgModel(
-                    self: data["sender"] == widget.name,
-                    message: data["message"],
-                    sender: data["sender"],
-                  ),
+                _messages[data["id"]] = MsgModel(
+                  self: data["sender"] == widget.name,
+                  message: data["message"],
+                  sender: data["sender"],
                 );
               },
             ),
             scrollDown(),
           },
         ),
+        socket.on("rate-limit", (data) => print(data)),
       },
     );
   }
 
   void sendMessage() {
     if (_msgController.text.isNotEmpty) {
+      var id = Uuid().v4();
       setState(
         () {
-          _messages.add(
-            MsgModel(
-              self: true,
-              message: _msgController.text,
-              sender: widget.name,
-            ),
+          _messages[id] = MsgModel(
+            self: true,
+            message: _msgController.text,
+            sender: widget.name,
           );
         },
       );
       socket.emit(
         "message",
         {
+          "id": id,
           "sender": widget.name,
           "message": _msgController.text,
         },
@@ -105,15 +105,16 @@ class _ChatPageState extends State<ChatPage> {
               controller: _scrollController,
               itemCount: _messages.length,
               itemBuilder: (context, index) {
-                if (_messages[index].self) {
+                String key = _messages.keys.elementAt(index);
+                if (_messages[key]!.self) {
                   return SentMessage(
-                    sender: _messages[index].sender,
-                    message: _messages[index].message,
+                    sender: _messages[key]!.sender,
+                    message: _messages[key]!.message,
                   );
                 } else {
                   return RecvMessage(
-                    sender: _messages[index].sender,
-                    message: _messages[index].message,
+                    sender: _messages[key]!.sender,
+                    message: _messages[key]!.message,
                   );
                 }
               },
