@@ -3,7 +3,12 @@ import 'package:flutter/material.dart';
 class SentMessage extends StatelessWidget {
   final String sender;
   final String message;
-  const SentMessage({super.key, required this.sender, required this.message});
+  final bool error;
+  const SentMessage(
+      {super.key,
+      required this.sender,
+      required this.message,
+      required this.error});
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +18,7 @@ class SentMessage extends StatelessWidget {
         constraints:
             BoxConstraints(maxWidth: MediaQuery.of(context).size.width * 0.8),
         child: Card(
-          color: Colors.green,
+          color: error ? Colors.red : Colors.green,
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
             child: Column(
