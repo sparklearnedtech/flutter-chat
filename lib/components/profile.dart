@@ -1,9 +1,8 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'dart:io';
-
 import 'package:maritech/helpers/userModel.dart';
+import 'package:http/http.dart' as http;
 
 class Profile extends StatefulWidget {
   const Profile({super.key});
@@ -22,25 +21,14 @@ class _ProfileState extends State<Profile> {
   }
 
   Future<void> fetchData() async {
-    var url = Uri.parse(
-        'http://randomuser.me/api/'); // Replace with your API endpoint
-
-    // Create an HttpClient instance
-    var httpClient = HttpClient();
-
-    // Ignore SSL certificate checks
-    httpClient.badCertificateCallback =
-        (X509Certificate cert, String host, int port) => true;
+    var url = Uri.https('randomuser.me', '/api/');
 
     try {
-      var request = await httpClient.getUrl(url);
-      var response = await request.close();
+      var response = await http.get(url);
+      print(response.body);
 
       if (response.statusCode == HttpStatus.ok) {
-        // Request successful, parse the response
-        var data = await response.transform(utf8.decoder).join();
-        // Request successful, parse the response
-        var jsonResponse = json.decode(data);
+        var jsonResponse = json.decode(response.body);
         var results = jsonResponse['results'];
         if (results != null && results.isNotEmpty) {
           var firstResult = results[0];
@@ -65,7 +53,7 @@ class _ProfileState extends State<Profile> {
       print('Request failed with error: $e');
     } finally {
       // Close the HttpClient when done
-      httpClient.close();
+      // httpClient.close();
     }
   }
 
@@ -87,6 +75,7 @@ class _ProfileState extends State<Profile> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Image.network(
+                // 'https://i.pinimg.com/736x/53/c8/c0/53c8c0e40d77ed6089343e55c30f08b2.jpg',
                 user.picture,
                 fit: BoxFit.fitWidth,
               ),
